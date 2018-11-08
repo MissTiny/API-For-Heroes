@@ -14,4 +14,5 @@ namespace Heroes
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
+
 }

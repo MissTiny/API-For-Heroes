@@ -59,6 +59,36 @@ namespace Heroes.Controllers
             return CreatedAtRoute("GetHero", new {id = person.Id}, person);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Update(long id, Hero person)
+        {
+            var hero = _dbContext.Heroes.Find(id);
+            if (hero == null)
+            {
+                return NotFound();
+            }
+
+            hero.Name = person.Name;
+
+            _dbContext.Heroes.Update(hero);
+            _dbContext.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            var hero = _dbContext.Heroes.Find(id);
+            if (hero == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Heroes.Remove(hero);
+            _dbContext.SaveChanges();
+            return NoContent();
+        }
 
     }
 }
